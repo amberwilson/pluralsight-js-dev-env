@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "description": "JavaScript development environment Pluralsight",
   "scripts": {
-    "prestart": "node buildScripts/startMessage.js",
-    "start": "node run open:src",
+    "prestart": "babel-node buildScripts/startMessage.js",
+    "start": "npm run open:src",
     "open:src": "nodemon buildScripts/srcServer.js",
     "ngrok": "ngrok http 3000",
     "tab:share": "ttab -t 'Sharing' npm run ngrok",
