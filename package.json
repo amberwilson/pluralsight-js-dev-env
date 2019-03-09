@@ -3,11 +3,17 @@
   "version": "1.0.0",
   "description": "JavaScript development environment Pluralsight",
   "scripts": {
-    "start": "nodemon ./buildScripts/srcServer.js"
+    "prestart": "node buildScripts/startMessage.js",
+    "start": "node run open:src",
+    "open:src": "nodemon buildScripts/srcServer.js",
+    "ngrok": "ngrok http 3000",
+    "tab:share": "ttab -t 'Sharing' npm run ngrok",
+    "share": "npm-run-all --parallel open:src tab:share"
   },
-  "author": "Cory House",
+  "author": "Amber Wilson",
   "license": "MIT",
   "dependencies": {
+    "add": "^2.0.6",
     "whatwg-fetch": "1.0.0"
   },
   "devDependencies": {
@@ -33,6 +39,7 @@
     "json-server": "0.8.22",
     "localtunnel": "1.8.1",
     "mocha": "3.1.2",
+    "ngrok": "^3.1.1",
     "nock": "8.1.0",
     "nodemon": "1.18.10",
     "npm-run-all": "3.1.1",
@@ -41,6 +48,7 @@
     "open": "0.0.5",
     "rimraf": "2.5.4",
     "style-loader": "0.13.1",
+    "ttab": "^0.6.1",
     "webpack": "1.13.2",
     "webpack-dev-middleware": "1.8.4",
     "webpack-hot-middleware": "2.13.0",
