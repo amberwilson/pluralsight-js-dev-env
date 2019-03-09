@@ -5,7 +5,7 @@
   "scripts": {
     "prestart": "babel-node buildScripts/startMessage.js",
     "start": "npm run open:src",
-    "open:src": "nodemon buildScripts/srcServer.js",
+    "open:src": "nodemon --exec babel-node buildScripts/srcServer.js",
     "ngrok": "ngrok http 3000",
     "tab:share": "ttab -t 'Sharing' npm run ngrok",
     "share": "npm-run-all --parallel open:src tab:share"
