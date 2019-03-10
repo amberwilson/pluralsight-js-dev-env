@@ -9,8 +9,7 @@
     "lint": "esw webpack.config.* src buildScripts --color",
     "lint:watch": "npm run lint -- --watch",
     "ngrok": "ngrok http 3000",
-    "tab:share": "ttab -t 'Sharing' npm run ngrok",
-    "share": "npm-run-all --parallel open:src tab:share",
+    "share": "npm-run-all --parallel open:src ngrok",
     "test": "mocha --reporter progress buildScripts/testSetup.js \"src/**/*.test.js\"",
     "test:watch": "npm run test -- --watch"
   },
@@ -49,7 +48,6 @@
     "numeral": "1.5.3",
     "rimraf": "2.5.4",
     "style-loader": "0.13.1",
-    "ttab": "^0.6.1",
     "webpack": "^4.29.6",
     "webpack-dev-middleware": "1.8.4",
     "webpack-hot-middleware": "2.13.0",
