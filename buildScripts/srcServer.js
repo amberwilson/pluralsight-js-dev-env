@@ -3,6 +3,8 @@ import path from "path";
 import webpack from "webpack";
 import config from "../webpack.config.dev";
 
+/* eslint-disable no-console */
+
 const port = 3000;
 const app = express();
 const compiler = webpack(config);
@@ -20,7 +22,7 @@ app.get("/", (req, res) => {
 
 app.listen(port, err => {
   if (err) {
-    console.log(error);
+    console.log(err);
   } else {
     console.log(`Server is running... http://localhost:${port}`);
   }

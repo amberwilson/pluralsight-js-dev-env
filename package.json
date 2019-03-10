@@ -4,8 +4,10 @@
   "description": "JavaScript development environment Pluralsight",
   "scripts": {
     "prestart": "babel-node buildScripts/startMessage.js",
-    "start": "npm run open:src",
+    "start": "npm-run-all --parallel lint:watch open:src",
     "open:src": "nodemon --exec babel-node buildScripts/srcServer.js",
+    "lint": "esw webpack.config.* src buildScripts --color",
+    "lint:watch": "npm run lint -- --watch",
     "ngrok": "ngrok http 3000",
     "tab:share": "ttab -t 'Sharing' npm run ngrok",
     "share": "npm-run-all --parallel open:src tab:share"
