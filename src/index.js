@@ -1,3 +1,4 @@
+import numeral from 'numeral';
 import "./index.css";
 import { getUsers, deleteUser } from "./api/userApi";
 
@@ -30,4 +31,7 @@ getUsers().then(result => {
       }
     };
   });
+
+  var myNumeral = numeral(1000);
+  console.log(myNumeral); /* eslint-disable-line no-console */
 });
