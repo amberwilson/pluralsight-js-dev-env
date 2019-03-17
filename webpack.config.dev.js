@@ -1,5 +1,6 @@
 import path from "path";
 import HtmlWebpackPlugin from "html-webpack-plugin";
+import Dotenv from "dotenv-webpack";
 
 export default {
   debug: true,
@@ -13,6 +14,10 @@ export default {
     filename: "[name].js"
   },
   plugins: [
+    new Dotenv({
+      path: "./.env.dev"
+    }),
+
     // Create HTML file that includes reference to bundled JS.
     new HtmlWebpackPlugin({
       template: "src/index.html",

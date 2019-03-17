@@ -1,7 +1,28 @@
+
+<!--
+  **NOTE:** This is a template for index.html
+  Is uses EJS and htmlWebpackPlugin to generate a different index.html for each environment.
+  htmlWebpackPlugin will dynamically add references to the scripts and styles that it bundles
+  to this file. The generated bundles have hash-based filenames,
+  so it's necessary to add the references dynamically.
+  EJS docs: http://www.embeddedjs.com
+  htmlWebpackPlugin examples: https://github.com/jaketrent/html-webpack-template/blob/master/index.ejs
+-->
 <!DOCTYPE html>
 
 <html lang="en">
   <head>
+    <% if (process.env.trackJSToken) { %>
+    <script src="https://cdn.trackjs.com/agent/v3/latest/t.js"></script>
+    <script>
+      window.TrackJS &&
+        TrackJS.install({
+          token: "<%= process.env.trackJSToken %>"
+          // for more configuration options, see https://docs.trackjs.com
+        });
+    </script>
+    <% } %>
+
     <meta charset="utf-8" />
 
     <title>JS Dev Environment</title>
@@ -19,9 +40,7 @@
         <th>Last Name</th>
         <th>Email</th>
       </thead>
-      <tbody id="users">
-
-      </tbody>
+      <tbody id="users"></tbody>
     </table>
   </body>
 </html>

@@ -1,26 +1,31 @@
-import webpack from 'webpack';
-import path from 'path';
-import HtmlWebpackPlugin from 'html-webpack-plugin';
-import WebpackMd5Hash from 'webpack-md5-hash';
-import ExtractTextPlugin from 'extract-text-webpack-plugin';
+import webpack from "webpack";
+import path from "path";
+import HtmlWebpackPlugin from "html-webpack-plugin";
+import WebpackMd5Hash from "webpack-md5-hash";
+import ExtractTextPlugin from "extract-text-webpack-plugin";
+import Dotenv from "dotenv-webpack";
 
 export default {
   debug: true,
-  devtool: 'source-map',
+  devtool: "source-map",
   noInfo: false,
   entry: {
-    vendor: path.resolve(__dirname, 'src/vendor'),
-    main: path.resolve(__dirname, 'src/index')
+    vendor: path.resolve(__dirname, "src/vendor"),
+    main: path.resolve(__dirname, "src/index")
   },
-  target: 'web',
+  target: "web",
   output: {
-    path: path.resolve(__dirname, 'dist'),
-    publicPath: '/',
-    filename: '[name].[chunkhash].js'
+    path: path.resolve(__dirname, "dist"),
+    publicPath: "/",
+    filename: "[name].[chunkhash].js"
   },
   plugins: [
+    new Dotenv({
+      path: "./.env.prod"
+    }),
+
     // Generate an external css file with a hash in the filename
-    new ExtractTextPlugin('[name].[contenthash].css'),
+    new ExtractTextPlugin("[name].[contenthash].css"),
 
     // Hash the files using MD5 so that their names change when the content changes.
     new WebpackMd5Hash(),
@@ -28,12 +33,12 @@ export default {
     // Use CommonsChunkPlugin to create a separate bundle
     // of vendor libraries so that they're cached separately.
     new webpack.optimize.CommonsChunkPlugin({
-      name: 'vendor'
+      name: "vendor"
     }),
 
     // Create HTML file that includes reference to bundled JS.
     new HtmlWebpackPlugin({
-      template: 'src/index.html',
+      template: "src/index.html",
       minify: {
         removeComments: true,
         collapseWhitespace: true,
@@ -46,7 +51,7 @@ export default {
         minifyCSS: true,
         minifyURLs: true
       },
-      inject: true,
+      inject: true
     }),
 
     // Eliminate duplicate packages when generating bundle
@@ -57,8 +62,8 @@ export default {
   ],
   module: {
     loaders: [
-      {test: /\.js$/, exclude: /node_modules/, loaders: ['babel']},
-      {test: /\.css$/, loader: ExtractTextPlugin.extract('css?sourceMap')}
+      { test: /\.js$/, exclude: /node_modules/, loaders: ["babel"] },
+      { test: /\.css$/, loader: ExtractTextPlugin.extract("css?sourceMap") }
     ]
   }
 };
